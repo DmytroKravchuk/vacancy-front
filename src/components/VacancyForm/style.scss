@@ -19,4 +19,53 @@ form#vacancy {
     font-weight: 700;
     line-height: 1.2;
   }
+
+  .ant-btn-primary {
+    margin-right: 5px;
+  }
+
+  .ant-btn-text {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 5px;
+    color: $RED;
+  }
+
+  .ant-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    label {
+      margin: 0 0 5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      padding-left: 20px;
+      margin-bottom: 24px;
+
+      .ant-input-affix-wrapper {
+        width: 100px;
+        &:first-child {
+          margin-right: 10px;
+        }
+        &:nth-of-type(2) {
+          margin-left: 10px;
+        }
+      }
+
+      i {
+        font-size: initial;
+        line-height: inherit;
+      }
+    }
+  }
+
+  .custom-error {
+    position: absolute;
+    opacity: 1;
+    top: 100%;
+  }
 }

@@ -11,7 +11,7 @@ const ModalButton = ({text}) => {
 
     return (<>
         <Button type="primary" className="modal-btn" onClick={ showModal }>{ text }</Button>
-        <Modal title="Создать вакансию" visible={isModalVisible} width={680}>
+        <Modal title="Создать вакансию" visible={isModalVisible} centered={true} width={680} footer={null}>
             <VacancyForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
         </Modal>
     </>)
