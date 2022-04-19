@@ -1,0 +1,22 @@
+@import "../../colors-palette";
+
+form#vacancy {
+  background-color: $GRAY;
+
+  section {
+    padding: 20px 30px 0;
+    border-bottom: 1px solid $GRAY2;
+  }
+
+  .headline {
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  label {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+}

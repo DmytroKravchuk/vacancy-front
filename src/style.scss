@@ -1,0 +1,67 @@
+@import "colors-palette";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  font: 400 13px/1.2 'Arial', sans-serif;
+}
+
+
+#root, .app {
+  height: 100%;
+}
+
+#root {
+  background-color: $GRAY;
+}
+
+.app {
+  max-width: 980px;
+  width: 100%;
+  padding: 30px 0;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.anticon-info-circle {
+  font-size: 18px;
+  color: $BLUE;
+  cursor: pointer;
+}
+
+.modal-btn {
+  width: 198px;
+  border-right: 5px;
+  background-color: $GREEN;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ant-modal-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.required-icon {
+  color: $RED;
+}
+
+.ant-modal-body {
+  padding: 0;
+}

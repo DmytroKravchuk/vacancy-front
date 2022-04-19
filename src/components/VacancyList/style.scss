@@ -1,0 +1,17 @@
+@import "../../colors-palette";
+
+.vacancy-list-wrapper {
+  background-color: $WHITE;
+  padding: 10px;
+  margin-bottom: 15px;
+
+  &.empty-list {
+    display: flex;
+    align-items: center;
+
+    p {
+      font-size: 17px;
+      font-weight: 700;
+    }
+  }
+}
