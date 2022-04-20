@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import Button from "antd/lib/button";
-import Modal from "antd/lib/modal";
 import PropTypes from 'prop-types';
-import VacancyForm from "../VacancyForm";
+import Popup from "../Popup";
 
-const ModalButton = ({text}) => {
+const ModalButton = ({text, type, isDefaultStyle, id}) => {
     const [ isModalVisible, setIsModalVisible ] = useState( false );
 
-    const showModal = () => setIsModalVisible( true );
+    const showModal = value => () => setIsModalVisible( value );
 
     return (<>
-        <Button type="primary" className="modal-btn" onClick={ showModal }>{ text }</Button>
-        <Modal title="Создать вакансию" visible={isModalVisible} centered={true} width={680} footer={null}>
-            <VacancyForm isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
-        </Modal>
+        <Button
+            type={ type || "primary" }
+            className={ isDefaultStyle ? null : "modal-btn" }
+            onClick={ showModal(true) }
+        >{ text }</Button>
+        <Popup isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} showModal={showModal} id={id} />
     </>)
 }
 
 ModalButton.propTypes = {
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    isDefaultStyle: PropTypes.bool,
+    id: PropTypes.string,
 }
 
 export default ModalButton;

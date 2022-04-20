@@ -2,16 +2,61 @@
 
 .vacancy-list-wrapper {
   background-color: $WHITE;
-  padding: 10px;
   margin-bottom: 15px;
 
   &.empty-list {
     display: flex;
     align-items: center;
+    padding: 10px;
 
     p {
-      font-size: 17px;
+      font-size: 1rem;
       font-weight: 700;
+    }
+  }
+
+  .vacancy-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid $GRAY;
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.412rem;
+      line-height: 1.2;
+      color: $BLUE;
+    }
+
+    .vacancy-item-salary {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+
+      .vacancy-item-salary-description {
+        font-weight: 400;
+        color: $GRAY3;
+      }
+    }
+
+    .vacancy-item-salary-address {
+      font-size: 1rem;
+      font-weight: 400;
+      color: $GRAY3;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .vacancy-item-props {
+      font-size: 1rem;
+      color: $BLUE;
+      cursor: pointer;
+
+      .anticon {
+        font-size: 0.6em;
+      }
     }
   }
 }

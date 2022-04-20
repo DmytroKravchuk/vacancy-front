@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 import EmptyList from "./EmptyList";
 import { getVacancies } from "../../store/reducers/vacancy/ActionCreators";
+import VacancyItem from "./VacancyItem";
 
 const VacancyList = () => {
     const dispatch = useDispatch();
     const {vacancies} = useSelector(state => state.vacancyReducer);
-    console.log(vacancies);
+
     useEffect(() => {
         dispatch(getVacancies());
     }, []);
@@ -21,6 +22,7 @@ const VacancyList = () => {
 
     return (
         <div className="vacancy-list-wrapper">
+            {vacancies.map(data => <VacancyItem data={data} key={data._id} />)}
         </div>
     )
 }

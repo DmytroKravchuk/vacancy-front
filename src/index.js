@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 
 import {setupStore} from "./store";
 import "./style.scss";
+import "./responsive.scss";
 
 import App from "./App";
 

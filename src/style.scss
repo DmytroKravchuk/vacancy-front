@@ -10,17 +10,13 @@ p {
 }
 
 html, body {
-  height: 100%;
-  font: 400 13px/1.2 'Arial', sans-serif;
-}
-
-
-#root, .app {
-  height: 100%;
+  height: 100vh;
+  background-color: $GRAY;
+  font: 400 17px/1.2 'Arial', sans-serif;
 }
 
 #root {
-  background-color: $GRAY;
+
 }
 
 .app {
@@ -33,12 +29,12 @@ html, body {
 h1 {
   margin-bottom: 15px;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 1.882rem;
   line-height: 1;
 }
 
 .anticon-info-circle {
-  font-size: 18px;
+  font-size: 1.059rem;
   color: $BLUE;
   cursor: pointer;
 }
@@ -48,12 +44,12 @@ h1 {
   border-right: 5px;
   background-color: $GREEN;
   border: none;
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .ant-modal-title {
-  font-size: 48px;
+  font-size: 2.824rem;
   font-weight: 700;
   line-height: 1;
 }
@@ -78,4 +74,13 @@ h1 {
 
 .ant-modal-content {
   height: 100%;
+}
+
+.vacancy-tooltip {
+  background-color: $WHITE;
+  width: 198px;
+
+  .ant-btn {
+    color: $BLUE;
+  }
 }
