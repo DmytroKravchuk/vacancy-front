@@ -8,34 +8,44 @@ import PropTypes from "prop-types";
 
 import cities from "../../cities.json";
 import "./style.scss";
+import { useDispatch } from "react-redux";
+import { addVacancy } from "../../store/reducers/vacancy/ActionCreators";
 
 const VacancyForm = ({setIsModalVisible}) => {
     const [form] = Form.useForm();
+    const dispatch = useDispatch();
     const [salaryRadioValue, setSalaryRadioValue] = useState("range");
-    const [salary, setSalary] = useState({range: [null, null], oneValue: [null]});
+    const [price, setPrice] = useState({range: {from: null, to: null}, oneValue: {static: null}});
     const [isValid, setIsValid] = useState({range: true, oneValue: true});
     const [isSubmit, setSubmit] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const onSetSalaryRadioValue = e => setSalaryRadioValue(e.target.value);
 
     const validationSalary = () => {
-        return !!(salary.range[0] && salary.range[1] && salaryRadioValue === "range") ||
-            !!(salary.oneValue[0] && salaryRadioValue === "oneValue") || salaryRadioValue === "none";
+        return !!(price.range.from && price.range.to && salaryRadioValue === "range") ||
+            !!(price.oneValue.static && salaryRadioValue === "oneValue") || salaryRadioValue === "none";
     };
 
     const toggleSalaryError = useCallback(() => {
-        setIsValid(state => ({
-                ...state,
-                range: !!(salary.range[0] && salary.range[1]),
-                oneValue: !!salary.oneValue[0]
-        }));
-    }, [salary]);
+        setIsValid(state => {
+            console.log(!!price.oneValue.static);
+            return {
+            ...state,
+                range: !!(price.range.from && price.range.to),
+                oneValue: !!price.oneValue.static
+            }
+        });
+    }, [price]);
 
     const onFinish = (values) => {
-        console.log(validationSalary());
         if (validationSalary()) {
-            console.log('Success:', values);
-            setIsModalVisible(false);
+            setLoading(true);
+            dispatch(addVacancy( {...values, price: price[salaryRadioValue]})).then(() => {
+                setIsModalVisible(false);
+            }).finally(() => {
+                setLoading(false);
+            })
         }
         setSubmit(true);
     };
@@ -43,6 +53,7 @@ const VacancyForm = ({setIsModalVisible}) => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
         setSubmit(true);
+        setLoading(false);
     };
 
     const onReset = () => {
@@ -50,10 +61,10 @@ const VacancyForm = ({setIsModalVisible}) => {
         setIsModalVisible(false);
     }
 
-    const salaryHandler = ({type, index}) => e => {
-        setSalary(state => {
-            const newValue = [...state[type]];
-            newValue[index] = e.target.value;
+    const salaryHandler = ({type, name}) => e => {
+        setPrice(state => {
+            const newValue = {...state[type]};
+            newValue[name] = e.target.value;
             return {
                 ...state,
                 [type]: newValue
@@ -65,8 +76,8 @@ const VacancyForm = ({setIsModalVisible}) => {
         if (isSubmit) {
             toggleSalaryError();
         }
-    }, [salary, toggleSalaryError, isSubmit]);
-
+    }, [price, toggleSalaryError, isSubmit]);
+    console.log(isValid);
     return (
         <Form
             form={form}
@@ -135,15 +146,15 @@ const VacancyForm = ({setIsModalVisible}) => {
                     {salaryRadioValue === "range" && (<div className="input-wrapper">
                         <Input
                             allowClear
-                            value={salary.range[0]}
-                            onChange={salaryHandler({type: "range", index: 0})}
+                            value={price.range.from}
+                            onChange={salaryHandler({type: "range", name: "from"})}
                             status={ !isValid.range && "error" }
                         />
                         <i>-</i>
                         <Input
                             allowClear
-                            value={salary.range[1]}
-                            onChange={salaryHandler({type: "range", index: 1})}
+                            value={price.range.to}
+                            onChange={salaryHandler({type: "range", name: "to"})}
                             status={ !isValid.range && "error" }
                         />
                         {!isValid.range && (<div className="ant-form-item-explain ant-form-item-explain-connected custom-error">
@@ -154,8 +165,8 @@ const VacancyForm = ({setIsModalVisible}) => {
                     {salaryRadioValue === "oneValue" && (<div className="input-wrapper">
                         <Input
                             allowClear
-                            value={salary.oneValue[0]}
-                            onChange={salaryHandler({type: "oneValue", index: 0})}
+                            value={price.oneValue.static}
+                            onChange={salaryHandler({type: "oneValue", name: "static"})}
                             status={ !isValid.oneValue && "error" }
                         />
                         {!isValid.oneValue && (<div className="ant-form-item-explain ant-form-item-explain-connected custom-error">
@@ -166,7 +177,7 @@ const VacancyForm = ({setIsModalVisible}) => {
                 </Radio.Group>
                 <Form.Item
                     label="Комментарий к зарплате"
-                    name="commentSalary"
+                    name="priceComment"
                     wrapperCol={ {
                         span: 10,
                     } }
@@ -177,7 +188,7 @@ const VacancyForm = ({setIsModalVisible}) => {
             <section>
                 <Form.Item
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={isLoading} loading={isLoading}>
                         Сохранить
                     </Button>
                     или
