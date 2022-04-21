@@ -10,10 +10,10 @@ export class VacancyService {
     }
 
     static async updateVacancy(id, data) {
-        return await $api.put(`/vacancy?id=${id}`, data);
+        return await $api.put(`/vacancy/${id}`, data);
     }
 
     static async deleteVacancy(id) {
-        return await $api.delete(`/vacancy?id=${id}`);
+        return await $api.delete(`/vacancy/${id}`);
     }
 }

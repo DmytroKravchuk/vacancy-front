@@ -28,3 +28,30 @@ export const addVacancy = createAsyncThunk(
     }
 );
 
+export const deleteVacancy = createAsyncThunk(
+    "delete/vacancy",
+    async (payload) => {
+        try {
+            const response = await VacancyService.deleteVacancy(payload);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            notification.error({message: e.message || "delete/vacancy error"})
+        }
+    }
+);
+
+export const updateVacancy = createAsyncThunk(
+    "update/vacancy",
+    async (payload) => {
+        const {id, data} = payload;
+        try {
+            const response = await VacancyService.updateVacancy(id, data);
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            notification.error({message: e.message || "update/vacancy error"})
+        }
+    }
+);
+

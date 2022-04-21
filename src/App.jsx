@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
 
 import VacancyList from "./components/VacancyList";
@@ -15,7 +15,9 @@ const App = () => {
                 tooltip="Example tooltip"
             />
             <VacancyList />
-            <ModalButton text="Создать вакансию" />
+            <footer>
+                <ModalButton text="Создать вакансию" />
+            </footer>
         </div>
     )
 }
